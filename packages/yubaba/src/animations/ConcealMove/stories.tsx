@@ -71,7 +71,12 @@ const TallListItem = styled.div<TallListItemProps>`
       : props.width}px;
 `;
 
-const build = (width: number, height: number, orientation: Orientation) => (
+const build = (
+  width: number,
+  height: number,
+  orientation: Orientation,
+  shrinkFocalElement: boolean = false
+) => (
   <Toggler>
     {({ shown, toggle }) => (
       <React.Fragment>
@@ -84,7 +89,7 @@ const build = (width: number, height: number, orientation: Orientation) => (
                 className={baba.className}
                 innerRef={baba.ref}
                 width={width}
-                height={height}
+                height={shrinkFocalElement ? height / 2 : height}
               />
             )}
           </Baba>
@@ -124,4 +129,7 @@ storiesOf('yubaba/ConcealMove', module)
   .addDecorator(story => <Container>{story()}</Container>)
   .add('TargetHeight', () => build(200, 200, 'vertical'))
   .add('TargetWidth', () => build(200, 200, 'horizontal'))
-  .add('TargetBoth', () => build(200, 200, 'both'));
+  .add('TargetBoth', () => build(200, 200, 'both'))
+  .add('TargetHeightShrink', () => build(200, 200, 'vertical', true))
+  .add('TargetWidthShrink', () => build(200, 200, 'horizontal', true))
+  .add('TargetBothShrink', () => build(200, 200, 'both', true));

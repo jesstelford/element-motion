@@ -50,13 +50,24 @@ export default class ConcealMove extends React.Component<ConcealMoveProps> {
 
     const { duration, timingFunction, zIndex } = this.props;
     // Scroll could have changed between unmount and this prepare step.
-    const fromTargetSizeLocation = recalculateElementBoundingBoxFromScroll(
-      data.origin.elementBoundingBox
-    );
+    const originTarget = recalculateElementBoundingBoxFromScroll(data.origin.elementBoundingBox);
     this.calculatedDuration =
       duration === 'dynamic'
-        ? dynamic(fromTargetSizeLocation, data.destination.elementBoundingBox)
+        ? dynamic(originTarget, data.destination.elementBoundingBox)
         : duration;
+
+    const focalNewLeft =
+      data.origin.focalTargetElementBoundingBox.location.left -
+      data.origin.elementBoundingBox.location.left;
+    const focalNewTop =
+      data.origin.focalTargetElementBoundingBox.location.top -
+      data.origin.elementBoundingBox.location.top;
+    const newLeft =
+      data.destination.elementBoundingBox.location.left -
+      data.origin.elementBoundingBox.location.left;
+    const newTop =
+      data.destination.elementBoundingBox.location.top -
+      data.origin.elementBoundingBox.location.top;
 
     return data.origin.render({
       ref: noop,
@@ -70,30 +81,22 @@ export default class ConcealMove extends React.Component<ConcealMoveProps> {
         position: 'absolute',
         transformOrigin: '0 0',
         willChange: 'transform, height, width',
-        top: fromTargetSizeLocation.location.top,
-        left: fromTargetSizeLocation.location.left,
+        top: originTarget.location.top,
+        left: originTarget.location.left,
         height: options.moveToTarget
           ? data.destination.elementBoundingBox.size.height
-          : fromTargetSizeLocation.size.height,
+          : originTarget.size.height,
         width: options.moveToTarget
           ? data.destination.elementBoundingBox.size.width
-          : fromTargetSizeLocation.size.width,
+          : originTarget.size.width,
         overflow: 'hidden',
-        transform: options.moveToTarget
-          ? `translate3d(${data.destination.elementBoundingBox.location.left -
-              data.origin.elementBoundingBox.location.left}px, ${data.destination.elementBoundingBox
-              .location.top - data.origin.elementBoundingBox.location.top}px, 0)`
-          : undefined,
+        transform: options.moveToTarget ? `translate3d(${newLeft}px, ${newTop}px, 0) ` : 'none',
       },
       className: options.moveToTarget
         ? css`
             > * {
               transition: transform ${this.calculatedDuration}ms ${timingFunction};
-              transform: translate3d(
-                -${data.origin.focalTargetElementBoundingBox.location.left - data.origin.elementBoundingBox.location.left}px,
-                -${data.origin.focalTargetElementBoundingBox.location.top - data.origin.elementBoundingBox.location.top}px,
-                0
-              );
+              transform: translate3d(-${focalNewLeft}px, -${focalNewTop}px, 0);
             }
           `
         : undefined,
