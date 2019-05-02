@@ -68,6 +68,12 @@ export default class ConcealMove extends React.Component<ConcealMoveProps> {
     const newTop =
       data.destination.elementBoundingBox.location.top -
       data.origin.elementBoundingBox.location.top;
+    const newScaleX =
+      data.destination.elementBoundingBox.size.width /
+      data.origin.focalTargetElementBoundingBox.size.width;
+    const newScaleY =
+      data.destination.elementBoundingBox.size.height /
+      data.origin.focalTargetElementBoundingBox.size.height;
 
     return data.origin.render({
       ref: noop,
@@ -90,13 +96,14 @@ export default class ConcealMove extends React.Component<ConcealMoveProps> {
           ? data.destination.elementBoundingBox.size.width
           : originTarget.size.width,
         overflow: 'hidden',
-        transform: options.moveToTarget ? `translate3d(${newLeft}px, ${newTop}px, 0) ` : 'none',
+        transform: options.moveToTarget ? `translate3d(${newLeft}px, ${newTop}px, 0)` : undefined,
       },
       className: options.moveToTarget
         ? css`
             > * {
               transition: transform ${this.calculatedDuration}ms ${timingFunction};
-              transform: translate3d(-${focalNewLeft}px, -${focalNewTop}px, 0);
+              transform: translate3d(-${focalNewLeft}px, -${focalNewTop}px, 0)
+                scale3d(${newScaleX}, ${newScaleY}, 1);
             }
           `
         : undefined,

@@ -88,8 +88,8 @@ const build = (
                 style={baba.style}
                 className={baba.className}
                 innerRef={baba.ref}
-                width={width}
-                height={shrinkFocalElement ? height / 2 : height}
+                width={shrinkFocalElement ? width / 1.5 : width}
+                height={shrinkFocalElement ? height / 1.5 : height}
               />
             )}
           </Baba>
