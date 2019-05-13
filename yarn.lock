@@ -861,7 +861,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.4":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.4":
   version "7.4.4"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.4.4.tgz#dc2e34982eb236803aa27a07fea6857af1b9171d"
   integrity sha512-w0+uT71b6Yi7i5SE0co4NioIpSYS6lLiXvCzWzGSKvpK5vdQtCbICHMj+gbAKAOtxiV6HsVh/MBdaF9EQ6faSg==
@@ -2692,7 +2692,12 @@ ansi-regex@^4.1.0:
   resolved "https://registry.npmjs.org/ansi-regex/-/ansi-regex-4.1.0.tgz#8b9f8f08cf1acb843756a839ca8c7e3168c51997"
   integrity sha512-1apePfXM1UOSqw0o9IiFAovVz9M5S1Dg+4TrDwfMewQ6p/rmMueb7tWZjQ1rx4Loy1ArBggoqGpfqqdI4rondg==
 
-ansi-styles@^2.2.1, ansi-styles@^3.2.0, ansi-styles@^3.2.1:
+ansi-styles@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.npmjs.org/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
+  integrity sha1-tDLdM1i2NM914eRmQ2gkBTPB3b4=
+
+ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   version "3.2.1"
   resolved "https://registry.npmjs.org/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
   dependencies:
@@ -12880,6 +12885,14 @@ react-split-pane@^0.1.77:
     react-dom "^16.6.3"
     react-lifecycles-compat "^3.0.4"
     react-style-proptype "^3.0.0"
+
+react-spring@9.0.0-beta.8:
+  version "9.0.0-beta.8"
+  resolved "https://registry.npmjs.org/react-spring/-/react-spring-9.0.0-beta.8.tgz#dd4348d3d6dd88ff596b36fa85b3328200914b15"
+  integrity sha512-pcyQqr5W9HBM5Rm0rmdbVIEQz7wocAfWBNWSUm/EEvpb4M0OQ3Xp9JW6Ayo+6ZgV7fLzJJHO/QgNdUMpAtVaTw==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    prop-types "^15.5.8"
 
 react-style-proptype@^3.0.0:
   version "3.2.2"
