@@ -16,11 +16,13 @@ import defer from '../lib/defer';
 import noop from '../lib/noop';
 import { throwIf, warn } from '../lib/log';
 import * as store from '../lib/store';
-import { withVisibilityManagerContext } from '../VisibilityManager';
+import { MotionContext } from '../VisibilityManager';
 import { MotionProps, MotionState, MotionBlock } from './types';
 
 export default class Motion extends React.PureComponent<MotionProps, MotionState> {
   static displayName = 'Motion';
+
+  static contextType = MotionContext;
 
   static defaultProps = {
     onFinish: noop,
@@ -33,6 +35,8 @@ export default class Motion extends React.PureComponent<MotionProps, MotionState
     motionsMarkup: [],
     childProps: {},
   };
+
+  context: React.ContextType<typeof MotionContext>;
 
   executing: boolean = false;
 
@@ -154,12 +158,12 @@ export default class Motion extends React.PureComponent<MotionProps, MotionState
   }
 
   notifyVisibilityManagerWeFinished() {
-    const { context, name } = this.props;
+    const { name } = this.props;
 
     // If a VisibilityManager is a parent up the tree context will be available.
     // Notify them that we're finished getting ready.
-    if (context) {
-      context.onFinish({ name });
+    if (this.context) {
+      this.context.onFinish({ name });
     }
   }
 
@@ -226,7 +230,7 @@ If it's an image, try and have the image loaded before mounting or set a static 
   }
 
   execute = (DOMSnapshot: store.MotionData | null = store.get(this.props.name)) => {
-    const { name, container: getContainer, context } = this.props;
+    const { name, container: getContainer } = this.props;
     const container = typeof getContainer === 'function' ? getContainer() : getContainer;
     let aborted = false;
 
@@ -389,8 +393,8 @@ If it's an image, try and have the image loaded before mounting or set a static 
       );
 
       // If a VisibilityManager is a parent somewhere, notify them that we're starting animating.
-      if (context) {
-        context.onStart({ name });
+      if (this.context) {
+        this.context.onStart({ name });
       }
 
       Promise.all(beforeAnimatePromises)
@@ -415,8 +419,8 @@ If it's an image, try and have the image loaded before mounting or set a static 
               )
               .then(() => {
                 // If a VisibilityManager is a parent somewhere, notify them that we're finished animating.
-                if (context) {
-                  context.onFinish({ name });
+                if (this.context) {
+                  this.context.onFinish({ name });
                 }
 
                 // Run through all after animates.
@@ -483,5 +487,3 @@ If it's an image, try and have the image loaded before mounting or set a static 
     );
   }
 }
-
-export const WrappedMotion = withVisibilityManagerContext(Motion);

@@ -19,7 +19,7 @@ import {
   Divider,
 } from '@material-ui/core';
 import * as Styled from './styled';
-import { WrappedMotion as Motion } from '../../../core/src/Motion';
+import Motion from '../../../core/src/Motion';
 import FocalRevealMove from '../../../motions/src/FocalRevealMove';
 import FocalConcealMove from '../../../motions/src/FocalConcealMove';
 import FocalTarget from '../../../core/src/FocalTarget';

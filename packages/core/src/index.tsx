@@ -1,4 +1,4 @@
-export { WrappedMotion as default } from './Motion';
+export { default } from './Motion';
 export { default as Wait } from './Wait';
 export { default as Noop } from '../../motions/src/Noop';
 export { default as CrossFadeMove } from '../../motions/src/CrossFadeMove';
@@ -20,8 +20,8 @@ export { default as FocalFocalConcealMove } from '../../motions/src/FocalConceal
 export { default as ReshapingContainer } from '../../motions/src/RevealReshapingContainer';
 export { default as RevealReshapingContainer } from '../../motions/src/RevealReshapingContainer';
 export { default as Reveal } from '../../motions/src/Reveal';
-export { WrappedVisibilityManager as VisibilityManager } from './VisibilityManager';
-export { WrappedVisibilityManager as MotionManager } from './VisibilityManager';
+export { default as VisibilityManager } from './VisibilityManager';
+export { default as MotionManager } from './VisibilityManager';
 export * from './Collector';
 export { default as Collector } from './Collector';
 export { default as FocalTarget } from './FocalTarget';

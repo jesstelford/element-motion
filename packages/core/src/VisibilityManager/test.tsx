@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme'; // eslint-disable-line
-import { WrappedMotion as Motion } from '../Motion';
-import { WrappedVisibilityManager as VisibilityManager } from '../VisibilityManager';
+import Motion from '../Motion';
+import VisibilityManager from '../VisibilityManager';
 import * as utils from '../__tests__/utils';
 import defer from '../lib/defer';
 

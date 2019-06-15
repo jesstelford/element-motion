@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount, ReactWrapper, shallow } from 'enzyme'; // eslint-disable-line import/no-extraneous-dependencies
 import { MemoryRouter, Link } from 'react-router-dom';
-import { WrappedMotion as Motion } from '../Motion';
+import Motion from '../Motion';
 import Target from '../FocalTarget';
 import { getElementBoundingBox } from '../lib/dom';
 import defer from '../lib/defer';

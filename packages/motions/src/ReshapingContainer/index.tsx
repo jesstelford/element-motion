@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { WrappedMotion as Motion } from '../../../core/src/Motion';
+import Motion from '../../../core/src/Motion';
 import Move from '../Move';
 import { InlineStyles } from '../../../core/src/Collector';
 import { Duration } from '../types';

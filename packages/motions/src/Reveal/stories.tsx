@@ -2,7 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 import { Toggler } from '@element-motion/dev';
-import { WrappedMotion as Motion } from '../../../core/src/Motion';
+import Motion from '../../../core/src/Motion';
 import Reveal from './index';
 
 const Container = styled.div`

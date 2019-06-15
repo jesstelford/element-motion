@@ -1,5 +1,4 @@
 import { CollectorChildrenProps, InlineStyles } from '../Collector';
-import { InjectedProps } from '../VisibilityManager';
 
 export type MotionFunc = () => Promise<void>;
 
@@ -22,7 +21,7 @@ export interface MotionState {
   motionsMarkup: React.ReactPortal[];
 }
 
-export interface BaseMotionProps extends CollectorChildrenProps, InjectedProps {
+export interface BaseMotionProps extends CollectorChildrenProps {
   /**
    * Callback called when all motions have finished and been cleaned up. Fired from the triggering Motion
    * component.
