@@ -8,7 +8,7 @@ module.exports = [
     path: 'dist/esm/packages/core/src/Motion/index.js',
   },
   {
-    limit: '486 B',
+    limit: '381 B',
     path: 'dist/esm/packages/core/src/Collector/index.js',
   },
   {
