@@ -56,7 +56,7 @@ describe('<Motion />', () => {
     expect(console.warn).not.toHaveBeenCalled();
   });
 
-  it('should not warn when using name', () => {
+  it.only('should not warn when using name', () => {
     console.warn = jest.fn();
     process.env.NODE_ENV = 'development';
 

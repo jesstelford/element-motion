@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { InlineStyles } from '../Collector';
+import noop from '../lib/noop';
 
 export interface VisibilityManagerProps {
   /**
@@ -32,14 +33,21 @@ export interface VisibilityManagerContext {
   onStart: Handler;
 }
 
-export const MotionContext = React.createContext<VisibilityManagerContext | undefined>(undefined);
+export const MotionContext = React.createContext<VisibilityManagerContext>({
+  onStart: noop,
+  onFinish: noop,
+});
 
 const VisibilityManager: React.FC<VisibilityManagerProps> = ({
   name,
   children,
+  isInitiallyVisible,
 }: VisibilityManagerProps) => {
   const context = React.useContext(MotionContext);
-  const [style, setStyle] = React.useState<InlineStyles>(() => ({}));
+  // Will set the style once on mount (using callback in use state hook).
+  const [style, setStyle] = React.useState<InlineStyles>(() => ({
+    visibility: isInitiallyVisible ? 'visible' : 'hidden',
+  }));
 
   const onStart: Handler = opts => {
     if (context && context.onFinish) {
@@ -49,8 +57,6 @@ const VisibilityManager: React.FC<VisibilityManagerProps> = ({
     if (name && opts.name !== name) {
       return;
     }
-
-    console.log('hmm');
 
     if (style.visibility === 'visible') {
       setStyle({
@@ -73,9 +79,8 @@ const VisibilityManager: React.FC<VisibilityManagerProps> = ({
     });
   };
 
-  console.log(style);
-
   return (
+    // Probably need to memoize value and callbacks.
     <MotionContext.Provider value={{ onFinish, onStart }}>
       {children({ style })}
     </MotionContext.Provider>

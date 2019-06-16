@@ -162,9 +162,7 @@ export default class Motion extends React.PureComponent<MotionProps, MotionState
 
     // If a VisibilityManager is a parent up the tree context will be available.
     // Notify them that we're finished getting ready.
-    if (this.context) {
-      this.context.onFinish({ name });
-    }
+    this.context.onFinish({ name });
   }
 
   delayedClearStore() {
@@ -393,9 +391,7 @@ If it's an image, try and have the image loaded before mounting or set a static 
       );
 
       // If a VisibilityManager is a parent somewhere, notify them that we're starting animating.
-      if (this.context) {
-        this.context.onStart({ name });
-      }
+      this.context.onStart({ name });
 
       Promise.all(beforeAnimatePromises)
         .then(() => {
@@ -419,9 +415,7 @@ If it's an image, try and have the image loaded before mounting or set a static 
               )
               .then(() => {
                 // If a VisibilityManager is a parent somewhere, notify them that we're finished animating.
-                if (this.context) {
-                  this.context.onFinish({ name });
-                }
+                this.context.onFinish({ name });
 
                 // Run through all after animates.
                 return blocks.reduce(
